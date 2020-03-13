@@ -1,0 +1,48 @@
+# ZSH config File
+
+# -------------------------------------------------------------------------------
+# Environment Variables
+# -------------------------------------------------------------------------------
+export EDITOR="emacsclient -c -a emacs"
+
+export VISUAL="emacsclient -c -a emacs"
+
+export DOTFILES_PATH=~/dotfiles
+
+export ZSH_CONFIG_PATH=$DOTFILES_PATH/zsh/config
+
+export VPN_CONFIG_PATH="/home/krg85/Documents/Xapo/vpn"
+
+# -------------------------------------------------------------------------------
+# Configuration Files
+# -------------------------------------------------------------------------------
+
+source $ZSH_CONFIG_PATH/plugins.zsh
+
+source $ZSH_CONFIG_PATH/options.zsh
+
+source $ZSH_CONFIG_PATH/mappings.zsh
+
+source $ZSH_CONFIG_PATH/functions.zsh
+
+source $ZSH_CONFIG_PATH/aliases.zsh
+
+# -----------------
+# Zsh configuration
+# -----------------
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+
+# -----------------
+# SSH Configuration
+# -----------------
+
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval `ssh-agent -s | tee ~/.ssh-agent-thing` &> /dev/null
+fi
+
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent-thing)" &>/dev/null
+fi
+

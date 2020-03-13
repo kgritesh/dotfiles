@@ -1,0 +1,23 @@
+[core]
+	excludesfile = ~/.gitignore
+
+[alias]
+    amend = commit -a --amend --no-edit
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+[credential]
+	helper = libsecret
+
+[color]
+	ui = auto
+
+[push]
+	default = simple
+
+# Use seperate file for private info (username, email, etc.)
+[include]
+  path = ~/.gitconfig.local
