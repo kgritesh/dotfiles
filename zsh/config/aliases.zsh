@@ -76,3 +76,5 @@ alias dprune="docker system prune"
 alias drmi="docker image prune -f"
 
 
+# Hub Aliases
+eval "$(hub alias -s)"
