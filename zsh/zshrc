@@ -3,9 +3,9 @@
 # -------------------------------------------------------------------------------
 # Environment Variables
 # -------------------------------------------------------------------------------
-export EDITOR="emacsclient -c -a emacs"
+export EDITOR='emacsclient -c -a emacs '
 
-export VISUAL="emacsclient -c -a emacs"
+export VISUAL='emacsclient -c -a emacs '
 
 export DOTFILES_PATH=~/dotfiles
 

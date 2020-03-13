@@ -21,3 +21,9 @@ fi
 # zsh-history-substring-search
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
+
+
+# Edit cli
+#autoload -z edit-command-line
+#zle -N edit-command-line
+#bindkey "^X^E" edit-command-line
