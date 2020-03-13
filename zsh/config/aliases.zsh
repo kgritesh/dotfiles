@@ -78,3 +78,11 @@ alias drmi="docker image prune -f"
 
 # Hub Aliases
 eval "$(hub alias -s)"
+
+# Git aliases
+alias gpo="git push origin HEAD"
+alias gpof="git push -f origin HEAD"
+
+commit-push() {
+    git ci -a -m $1 && gpo
+}
