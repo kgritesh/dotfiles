@@ -3,6 +3,18 @@
 	     '("melpa" . "https://melpa.org/packages/")
              '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 
+
+;; Start emacs in maximised mode
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+
+;;---------------------------------------------------------------------------- ;;
+;; Adjust garbage collection thresholds during startup, and thereafter	  ;;
+;;---------------------------------------------------------------------------- ;;
+(setq gc-cons-threshold (* 128 1024 1024))				  ;;
+(add-hook 'emacs-startup-hook						  ;;
+            (lambda () (setq gc-cons-threshold (* 20 1024 1024))))	  ;;
+
 (when (not package-archive-contents)
   (package-refresh-contents))
 
@@ -56,7 +68,7 @@
 
 ;; Backups enabled, use nil to disable
 (setq
- history-length                     1000
+ history-length                     100000
  backup-inhibited                   nil
  make-backup-files                  t
  auto-save-default                  t
@@ -80,9 +92,12 @@
   (scroll-bar-mode -1))
 
 (show-paren-mode 1)
+(blink-cursor-mode -1)
+(column-number-mode 1)
 
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 (provide 'base)
 ;;; base ends here

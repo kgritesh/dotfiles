@@ -38,14 +38,14 @@
   ("M-x" . counsel-M-x)
   ("C-x C-m" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-x c k" . counsel-yank-pop))
+  ("M-y" . counsel-yank-pop))
 
 (use-package counsel-projectile
   :bind
   ("C-x v" . counsel-projectile)
   ("C-x c p" . counsel-projectile-ag)
   :config
-  (counsel-projectile-on))
+  (counsel-proj3ectile-on))
 
 (use-package ivy
   :bind
@@ -68,9 +68,9 @@
 
 (use-package magit
   :config
-  
+
   (setq magit-completing-read-function 'ivy-completing-read)
-  
+
   :bind
   ;; Magic
   ("C-x g s" . magit-status)
@@ -125,15 +125,15 @@
   :config
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
-  
+
   (setq projectile-completion-system 'ivy)
-  
+
   (projectile-global-mode))
 
-(use-package recentf
-  :config
-  (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
-  (recentf-mode 1))
+;; (use-package recentf
+;;   :config
+;;   (setq recentf-save-file (recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
+;;   (recentf-mode 1))
 
 (use-package smartparens)
 
