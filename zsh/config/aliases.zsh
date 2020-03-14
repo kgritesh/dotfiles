@@ -84,5 +84,6 @@ alias gpo="git push origin HEAD"
 alias gpof="git push -f origin HEAD"
 
 commit-push() {
-    git ci -a -m $1 && gpo
+	git ci -a -m $1 && gpo
 }
+
