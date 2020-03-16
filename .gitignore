@@ -1,0 +1,6 @@
+private
+elpa
+.custom.el
+auto-save-list/
+smex-items
+transient/

@@ -43,9 +43,9 @@
 (use-package counsel-projectile
   :bind
   ("C-x v" . counsel-projectile)
-  ("C-x c p" . counsel-projectile-ag)
+  ("C-x p s" . counsel-projectile-rg)
   :config
-  (counsel-proj3ectile-on))
+  (counsel-projectile-on))
 
 (use-package ivy
   :bind
@@ -126,6 +126,7 @@
   (setq projectile-known-projects-file
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
 
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
 
   (projectile-global-mode))
