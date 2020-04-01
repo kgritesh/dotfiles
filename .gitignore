@@ -4,3 +4,6 @@ elpa
 auto-save-list/
 smex-items
 transient/
+emacs/elpy
+emacs/recentf
+emacs/url

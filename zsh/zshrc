@@ -11,7 +11,11 @@ export DOTFILES_PATH=~/dotfiles
 
 export ZSH_CONFIG_PATH=$DOTFILES_PATH/zsh/config
 
+export ZSH_FUNC_PATH=$DOTFILES_PATH/zsh/funcs
+
 export VPN_CONFIG_PATH="/home/krg85/Documents/Xapo/vpn"
+
+export fpath=($ZSH_FUNC_PATH  "${fpath[@]}" )
 
 # -------------------------------------------------------------------------------
 # Configuration Files
@@ -45,4 +49,3 @@ fi
 if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh-agent-thing)" &>/dev/null
 fi
-
