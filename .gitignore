@@ -7,3 +7,4 @@ transient/
 emacs/elpy
 emacs/recentf
 emacs/url
+projectile.cache

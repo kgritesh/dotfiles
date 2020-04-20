@@ -13,5 +13,5 @@
 (require 'base-global-keys)
 
 (require 'lang-python)
-
 (require 'lang-go)
+(require 'lang-javascript)
