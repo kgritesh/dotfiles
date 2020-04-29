@@ -15,3 +15,5 @@
 (require 'lang-python)
 (require 'lang-go)
 (require 'lang-javascript)
+(require 'lang-yaml)
+(require 'init-org-mode)

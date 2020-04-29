@@ -100,7 +100,7 @@
 
 (use-package org
   :config
-  (setq org-directory "~/org-files"
+  (setq org-directory "~/Documents/orgmode"
         org-default-notes-file (concat org-directory "/todo.org"))
   :bind
   ("C-c l" . org-store-link)
