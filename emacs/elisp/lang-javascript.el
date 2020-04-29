@@ -6,11 +6,6 @@
               (when (string-equal "js" (file-name-extension buffer-file-name))
                 (setup-tide-mode))))
 
-(add-hook 'js-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              ;; (add-hook 'before-save-hook 'tide-format-before-save nil t)
-              (setup-tide-mode))))
 
 (add-hook 'js-mode-hook
           (lambda ()
@@ -22,25 +17,21 @@
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
+
 (setq js-indent-level 2)
 
 (require 'flycheck)
 (flycheck-add-mode 'javascript-eslint 'js-mode)
 (flycheck-add-mode 'typescript-tslint 'js-mode)
 
-(use-package json-mode
-  :config
-  (add-hook 'json-mode-hook
-            (lambda ()
-              (local-set-key (kbd "M-.") 'lsp-find-definition)
-              (setq-local lsp-eldoc-render-all t)
-              (lsp))))
+(use-package json-mode)
 
 (use-package typescript-mode
   :defer t
   :config
   (add-hook 'typescript-mode-hook 'setup-tide-mode))
 
+(setq typescript-indent-level 2)
 
 (use-package tide
   :init
@@ -99,7 +90,7 @@
 
 (use-package prettier-js
   :hook (
-         ;; (typescript-mode . prettier-js-mode)
+         (typescript-mode . prettier-js-mode)
          ;; (web-mode . prettier-js-mode)
          (js-mode . prettier-js-mode)
          (json-mode . prettier-js-mode)))
