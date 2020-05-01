@@ -138,12 +138,13 @@
 
 (use-package smartparens)
 
-(use-package smex)
+(use-package smerge-basic-map)
 
 (use-package undo-tree
   :config
-  ;; Remember undo history
+  ;; Remember undo histor
   (setq
+   undo-tree-visualizer-diff t
    undo-tree-auto-save-history nil
    undo-tree-history-directory-alist `(("." . ,(concat temp-dir "/undo/"))))
   (global-undo-tree-mode 1))

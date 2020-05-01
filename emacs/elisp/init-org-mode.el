@@ -3,10 +3,14 @@
   (setq org-directory "~/Documents/orgmode"
         org-default-notes-file (concat org-directory "/todo.org"))
 
+  (setq org-agenda-files '("~/Documents/orgmode/todos/" "~/Documents/orgmode/daily-journals" "~/Documents/orgmode/habits.org"))
+
   (setq org-log-done 'time)
   (setq org-use-speed-commands t)
   (setq org-return-follows-link t)
   (setq org-enforce-todo-dependencies t)
+  (setq org-todo-keywords
+      '((sequence "TODO" "IN-PROGRESS" "DONE")))
 
   :bind
   ("C-c l" . org-store-link)
@@ -17,8 +21,7 @@
 (use-package org-projectile
   :config
   (org-projectile-per-project)
-  (setq org-projectile-per-project-filepath "todo.org"
-	org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+  (setq org-projectile-per-project-filepath "todo.org")
   :bind
   ("C-c c" .  'org-capture)
   ("C-c n p" . org-projectile-project-todo-completing-read))
@@ -44,6 +47,7 @@
   (org-journal-file-format "%Y-%m-%d.org")
   (org-journal-dir "~/Documents/orgmode/daily-journals")
   (org-journal-date-format "%A, %d %B %Y")
+  (org-extend-today-until 20)
 )
 
 (defun pc/new-buffer-p ()
