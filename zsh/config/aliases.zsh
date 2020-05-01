@@ -87,3 +87,8 @@ commit-push() {
 	git ci -a -m $1 && gpo
 }
 
+alias copyc="echo \"!!\" | xcopy"
+
+wifi-connect() {
+    nmcli connection up $1
+}
