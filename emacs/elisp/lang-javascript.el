@@ -1,5 +1,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.component.html$\\'" . js-mode))
+
+
 (add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js-mode-hook
             (lambda ()
@@ -17,6 +22,10 @@
             (when (string-equal "jsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
+(add-hook 'js-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
 
 (setq js-indent-level 2)
 
@@ -46,7 +55,13 @@
   (setq create-lockfiles t)
   (setq tide-root-config-files '("tsconfig.app.json" "tsconfig.json" "jsconfig.json"))
   (setq tide-completion-detailed nil)
-)
+  (add-hook 'typescript-mode
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+  )
+
+
 ;; (setq tide-tsserver-executable "~/work/repos/tide/tsserver/tsserver.js")
 ;; (setq tide-tsserver-executable "/usr/local/bin/tsserver")
 ;; (setq tide-tsserver-executable nil)

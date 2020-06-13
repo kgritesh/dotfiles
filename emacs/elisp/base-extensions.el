@@ -138,7 +138,7 @@
 
 (use-package smartparens)
 
-(use-package smerge-basic-map)
+;; (use-package smerge-basic-map)
 
 (use-package undo-tree
   :config
