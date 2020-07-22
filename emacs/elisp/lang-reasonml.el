@@ -39,3 +39,5 @@
 
 (add-hook 'reason-mode-hook (lambda ()
           (add-hook 'before-save-hook #'refmt-before-save)))
+
+(provide 'lang-reasonml)
