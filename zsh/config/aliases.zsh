@@ -25,8 +25,6 @@ alias 5='cd -5'
 alias stagingvpn="cd ${VPN_CONFIG_PATH} &&  sudo openvpn --config staging.ovpn --daemon && cd -"
 
 # Misc Aliases
-alias emacs="emacsclient -c -a emacs"
-
 alias open="gio open"
 
 alias -g xcopy="xclip -selection clipboard"
@@ -63,6 +61,10 @@ pipfind() {
 }
 
 
+# editor aliases
+alias emacs="emacsclient -c"
+export EDITOR="emacs"
+
 
 # Docker Aliases
 alias dps="docker ps -a -q"
@@ -80,8 +82,9 @@ alias drmi="docker image prune -f"
 eval "$(hub alias -s)"
 
 # Git aliases
-alias gpo="git push origin HEAD"
-alias gpof="git push -f origin HEAD"
+alias gpo='git push origin `git branch --show-current`'
+alias gpof='git push -f origin `git branch --show-current`'
+alias gpull='git pull origin `git branch --show-current`'
 
 commit-push() {
 	git ci -a -m $1 && gpo
@@ -92,3 +95,18 @@ alias copyc="echo \"!!\" | xcopy"
 wifi-connect() {
     nmcli connection up $1
 }
+
+add-alias() {
+    echo "alias $1=$2" >> ${ZSH_CONFIG_PATH}/.zcustom.zsh
+}
+
+activateScript() {
+  for var in "$@"
+  do
+    DIR="$( cd "$( dirname $var )" && pwd )"
+    sudo ln -s $DIR/"$var" /usr/bin/
+  done
+}
+
+
+source ${ZSH_CONFIG_PATH}/.zcustom.zsh

@@ -16,10 +16,12 @@
 	ui = auto
 
 [push]
-	default = simple
+	default = current
 
 # Use seperate file for private info (username, email, etc.)
 [include]
   path = ~/.gitconfig.local
 [diff]
 	tool = meld
+[branch]
+	autoSetupMerge = always

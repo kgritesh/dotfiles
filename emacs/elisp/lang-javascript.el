@@ -75,7 +75,6 @@
   (eldoc-mode t)
   (tide-hl-identifier-mode +1)
   ;; (tide-hl-identifier-mode +1)
-  (idle-highlight-mode 0)
   (company-mode +1))
 
 ;; (setq tide-tsserver-process-environment '())
@@ -109,5 +108,8 @@
          ;; (web-mode . prettier-js-mode)
          (js-mode . prettier-js-mode)
          (json-mode . prettier-js-mode)))
+
+;; Angular
+(use-package ng2-mode)
 
 (provide 'lang-javascript)

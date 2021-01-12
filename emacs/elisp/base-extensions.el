@@ -6,11 +6,18 @@
 
 (use-package company
   :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+)
 
-(use-package dashboard
-  :config
-  (dashboard-setup-startup-hook))
+;; (use-package dashboard
+;;   :config
+;;   (dashboard-setup-startup-hook)
+;;   (setq dashboard-items '((recents  . 5)
+;;                         (bookmarks . 5)
+;;                         (projects . 5)))
+;;   (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name))
 
 (use-package ediff
   :config

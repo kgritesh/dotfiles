@@ -15,8 +15,10 @@
 			    (set (make-local-variable 'company-backends) '(company-go))
 			    (company-mode))))
 
+(use-package go-guru)
+
 (use-package company-go
-  :after go-mode
+  :after go-modeg
   :config
   (setq tab-width 4)
 
@@ -35,5 +37,6 @@
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
            "go build -v && go test -v && go vet")))
+
 
 (provide 'lang-go)

@@ -67,8 +67,8 @@
  bookmark-default-file              (concat temp-dir "/bookmarks"))
 
 ;; Backups enabled, use nil to disable
-(unless (file-exists-p (concat temp-dir "/auto-save-list"))
-		       (make-directory (concat temp-dir "/auto-save-list") :parents))
+(unless (file-exists-p (concat temp-dir "/auto-save-list/"))
+		       (make-directory (concat temp-dir "/auto-save-list/") :parents))
 
 (setq
  history-length                     100000
@@ -79,11 +79,11 @@
  delete-old-versions                t
  kept-old-versions                  6
  kept-new-versions                  9
- auto-save-default                  t
- auto-save-list-file-name           (concat temp-dir "/autosave")
  create-lockfiles                   nil
  backup-directory-alist            `((".*" . ,(concat temp-dir "/backup/")))
- auto-save-file-name-transforms    `((".*" ,(concat temp-dir "/auto-save-list/") t)))
+ auto-save-visited-file-name        t
+ auto-save-visited-mode             t
+)
 
 
 (fset 'yes-or-no-p 'y-or-n-p)

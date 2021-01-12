@@ -9,3 +9,7 @@ emacs/recentf
 emacs/url
 projectile.cache
 emacs/org-journal.cache
+emacs/.cache/
+emacs/.lsp-session-v1
+emacs/session.*
+emacs/tramp

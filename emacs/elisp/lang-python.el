@@ -14,24 +14,32 @@
     (setq elpy-rpc-backend "jedi")
     ;; (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
     ;;flycheck-python-flake8-executable "/usr/local/bin/flake8"
+    ;; (when (require 'flycheck nil t)
+    ;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    ;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+    (add-hook 'elpy-mode-hook (lambda ()
+                            (add-hook 'before-save-hook
+				      'elpy-black-fix-code nil t)))
     :bind (:map elpy-mode-map
-	      ("M-." . elpy-goto-definition)
-	      ("M-," . pop-tag-mark)))
+		("M-." . elpy-goto-definition)
+		("M-," . pop-tag-mark)
+		("C-M-," . elpy-goto-definition-other-window)))
+
   (elpy-enable))
 
 (use-package pip-requirements
-  :config
-  (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup))
+    :config
+    (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup))
 
 (use-package py-autopep8)
-
 
 (use-package pyenv-mode
   :if
   (executable-find "pyenv")
   :init
   (add-to-list 'exec-path "~/.pyenv/shims")
-  (setenv "WORKON_HOME" "~/.pyenv/versions/")
+  (setenv "WORKON_HOME" "/home/krg85/.local/share/virtualenvs")
   :config
   (pyenv-mode)
   :bind
