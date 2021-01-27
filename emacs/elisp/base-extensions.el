@@ -52,7 +52,7 @@
   ("C-x v" . counsel-projectile)
   ("C-x p s" . counsel-projectile-rg)
   :config
-  (counsel-projectile-on))
+  (counsel-projectile-mode))
 
 (use-package ivy
   :bind

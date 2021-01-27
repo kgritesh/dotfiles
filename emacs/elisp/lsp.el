@@ -3,22 +3,28 @@
 (setq lsp-keymap-prefix "C-l")
 
 (use-package lsp-mode
-    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-            (go-mode . lsp-deferred)
-            ;; if you want which-key integration
-            (lsp-mode . lsp-enable-which-key-integration))
-
-    :commands lsp lsp-deferred)
-
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :config (progn
+            ;; use flycheck, not flymake
+            (setq lsp-prefer-flymake nil)))
 
 
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-peek-enable t)
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-imenu-enable t)
+  (lsp-ui-flycheck-enable t)
+  :init
+)
+
+(setq
+)
+;;
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
