@@ -6,6 +6,8 @@
   :ensure t
   :commands (lsp lsp-deferred)
   :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :hook ((html-mode . lsp)
+         (css-mode . lsp))
   :config (progn
             ;; use flycheck, not flymake
             (setq lsp-prefer-flymake nil)))

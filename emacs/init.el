@@ -13,12 +13,19 @@
 (require 'base-global-keys)
 
 (require 'lsp)
-(require 'lang-javascript)
-(require 'lang-yaml)
-(require 'init-markdown)
-(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
+(require 'config-html)
+(require 'config-golang)
+(require 'config-js)
+(require 'config-python)
+(require 'config-modes)
 (require 'lang-reasonml)
-(require 'lsp-golang)
-(require 'terraform)
-(require 'init-docker)
-(require 'lsp-python)
+(require 'lang-ocaml)
+(require 'lang-yaml)
+(put 'downcase-region 'disabled nil)
+
+;;(require 'lang-python)
+;;(require 'lang-javascript)
+
+
+;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
+;; ## end of OPAM user-setup addition for emacs / base ## keep this line

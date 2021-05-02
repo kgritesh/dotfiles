@@ -1,7 +1,12 @@
 ;; ## added by OPAM user-setup for emacs / base ## cfd3c9b7837c85cffd0c59de521990f0 ## you can edit, but keep this line
-(provide 'opam-user-setup)
+(provide 'lang-ocaml)
 
 ;; Base configuration for OPAM
+
+(use-package ocamlformat
+  :custom (ocamlformat-enable 'enable-outside-detected-project)
+  :hook (before-save . ocamlformat-before-save)
+  )
 
 (defun opam-shell-command-to-string (command)
   "Similar to shell-command-to-string, but returns nil unless the process
@@ -120,3 +125,35 @@
 
 (opam-auto-tools-setup)
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
+;; ## added by OPAM user-setup for emacs / tuareg ## 69caecb902c26585ecd6f508bcde49f3 ## you can edit, but keep this line
+;; Set to autoload tuareg from its original switch when not found in current
+;; switch (don't load tuareg-site-file as it adds unwanted load-paths)
+(defun opam-tuareg-autoload (fct file doc args)
+  (let ((load-path (cons "/home/krg85/.opam/ocaml-system.4.11.1/share/emacs/site-lisp" load-path)))
+    (load file))
+  (apply fct args))
+(when (not (member "tuareg" opam-tools-installed))
+  (defun tuareg-mode (&rest args)
+    (opam-tuareg-autoload 'tuareg-mode "tuareg" "Major mode for editing OCaml code" args))
+  (defun tuareg-run-ocaml (&rest args)
+    (opam-tuareg-autoload 'tuareg-run-ocaml "tuareg" "Run an OCaml toplevel process" args))
+  (defun ocamldebug (&rest args)
+    (opam-tuareg-autoload 'ocamldebug "ocamldebug" "Run the OCaml debugger" args))
+  (defalias 'run-ocaml 'tuareg-run-ocaml)
+  (defalias 'camldebug 'ocamldebug)
+  (add-to-list 'auto-mode-alist '("\\.ml[iylp]?\\'" . tuareg-mode))
+  (add-to-list 'auto-mode-alist '("\\.eliomi?\\'" . tuareg-mode))
+  (add-to-list 'interpreter-mode-alist '("ocamlrun" . tuareg-mode))
+  (add-to-list 'interpreter-mode-alist '("ocaml" . tuareg-mode))
+  (dolist (ext '(".cmo" ".cmx" ".cma" ".cmxa" ".cmxs" ".cmt" ".cmti" ".cmi" ".annot"))
+    (add-to-list 'completion-ignored-extensions ext)))
+;; ## end of OPAM user-setup addition for emacs / tuareg ## keep this line
+;; ## added by OPAM user-setup for emacs / ocp-indent ## 1062b72cdc07a100a406eaa3ebc53157 ## you can edit, but keep this line
+;; Load ocp-indent from its original switch when not found in current switch
+(when (not (assoc "ocp-indent" opam-tools-installed))
+  (autoload 'ocp-setup-indent "/home/krg85/.opam/ocaml-system.4.11.1/share/emacs/site-lisp/ocp-indent.el" "Improved indentation for Tuareg mode")
+  (autoload 'ocp-indent-caml-mode-setup "/home/krg85/.opam/ocaml-system.4.11.1/share/emacs/site-lisp/ocp-indent.el" "Improved indentation for Caml mode")
+  (add-hook 'tuareg-mode-hook 'ocp-setup-indent t)
+  (add-hook 'caml-mode-hook 'ocp-indent-caml-mode-setup  t)
+  (setq ocp-indent-path "/home/krg85/.opam/ocaml-system.4.11.1/bin/ocp-indent"))
+;; ## end of OPAM user-setup addition for emacs / ocp-indent ## keep this line

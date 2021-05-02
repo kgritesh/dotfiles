@@ -28,3 +28,4 @@ zmodule zsh-users/zsh-history-substring-search
 zmodule archive
 
 
+zmodule lukechilds/zsh-nvm

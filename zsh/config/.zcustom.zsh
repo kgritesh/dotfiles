@@ -1,0 +1,7 @@
+alias pashi='cd /home/krg85/Projects/pashi'
+alias pashi-core='cd /home/krg85/Projects/pashi/pashi-dsl-backend'
+alias consultproj='cd /home/krg85/Projects/consulting-calculator'
+alias consultproj='cd /home/krg85/Projects/consulting-calculator'
+alias consultproj='cd /home/krg85'
+alias pashi-lib-user='cd /home/krg85/Projects/golang/src/lib_user'
+alias emserver='/usr/bin/emacs'

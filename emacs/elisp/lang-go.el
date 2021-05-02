@@ -1,10 +1,8 @@
 (use-package go-mode
   :config
   ; Use goimports instead of go-fmt
-  (setq gofmt-command "goimports")
   (add-hook 'go-mode-hook 'company-mode)
   ;; Call Gofmt before saving
-  (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'setup-go-mode-compile)
   (add-hook 'go-mode-hook #'smartparens-mode)
   (add-hook 'go-mode-hook '(lambda ()

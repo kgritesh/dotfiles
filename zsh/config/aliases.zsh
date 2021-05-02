@@ -97,7 +97,15 @@ wifi-connect() {
 }
 
 add-alias() {
-    echo "alias $1=$2" >> ${ZSH_CONFIG_PATH}/.zcustom.zsh
+    echo "alias $1='$2'" >> ${ZSH_CONFIG_PATH}/.zcustom.zsh
+}
+
+add-path-alias() {
+    echo "alias $1='cd $(pwd)'" >> ${ZSH_CONFIG_PATH}/.zcustom.zsh
+}
+
+ignore() {
+    
 }
 
 activateScript() {

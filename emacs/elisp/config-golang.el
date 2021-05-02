@@ -16,5 +16,4 @@
       lsp-eldoc-render-all t
       lsp-gopls-complete-unimported t
 )
-(provide 'lsp-golang)
-
+(provide 'config-golang)

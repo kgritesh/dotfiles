@@ -134,6 +134,8 @@
         (expand-file-name "projectile-bookmarks.eld" temp-dir))
 
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-enable-caching t)
+  (setq projectile-indexing-method 'native)
   (setq projectile-completion-system 'ivy)
 
   (projectile-global-mode))
