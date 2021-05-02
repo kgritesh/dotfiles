@@ -17,6 +17,7 @@
 (require 'config-golang)
 (require 'config-js)
 (require 'config-python)
+(require 'config-rust)
 (require 'config-modes)
 (require 'lang-reasonml)
 (require 'lang-ocaml)
