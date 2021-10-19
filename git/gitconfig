@@ -9,10 +9,6 @@
     br = branch
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     add-ignore = !"g(){ url="https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore" ; curl --output /dev/null --silent --head --fail "$url" ; if [ $? -eq 0 ]; then curl "$url" >> .gitignore && echo "Appended .gitignore with $url" ; else echo "$url doesnt exist." ; fi ; }; g"
-
-[credential]
-	helper = libsecret
-
 [color]
 	ui = auto
 

@@ -2,7 +2,7 @@
   :bind (("C-c ]" . emmet-next-edit-point)
          ("C-c [" . emmet-prev-edit-point)
          ("C-c o b" . browse-url-of-file))
-  :mode ("\\.html\\'" "\\.css\\'" "\\.php\\'" "\\.tmpl\\'")
+  :mode ("\\.html\\'" "\\.css\\'" "\\.php\\'" "\\.tmpl\\'" "\\.gohtml\\'")
   :config
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
@@ -12,7 +12,8 @@
   (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
         ("blade"  . "\\.blade\\.")
-	("go"  . "\\.tmpl\\."))
+	("go"  . "\\.tmpl\\.")
+        ("go"  . "\\.gohtml\\."))
 
   )
 

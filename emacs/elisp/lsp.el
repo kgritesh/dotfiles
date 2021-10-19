@@ -4,26 +4,31 @@
 
 (use-package lsp-mode
   :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-l")
   :commands (lsp lsp-deferred)
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
   :hook ((html-mode . lsp)
-         (css-mode . lsp))
+         (css-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-after-open . lsp-origami-try-enable))
   :bind (
 	 ("M-j" . lsp-ui-imenu)
 	 ("M-?" . lsp-find-references)
-	 ("C-l C-e" . flycheck-list-errors)
-	 ("C-l C-r" . lsp-workspace-restart)
-	 ("C-l C-a" . lsp-execute-code-action)
+	 ("C-c C-e" . flycheck-list-errors)
+	 ("C-c C-r" . lsp-workspace-restart)
+	 ("C-c C-a" . lsp-execute-code-action)
 	 )
   :custom
     (lsp-eldoc-render-all t)
     (lsp-idle-delay 0.6)
-  :config (progn
-            ;; use flycheck, not flymake
-            (setq lsp-prefer-flymake nil))
+    (lsp-prefer-flymake nil)
+    (lsp-rust-analyzer-server-display-inlay-hints t)
+  :config
+    (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+)
 
-  )
 
+(use-package lsp-origami)
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -51,5 +56,6 @@
 (with-eval-after-load 'lsp-mode
   ;; :global/:workspace/:file
   (setq lsp-modeline-diagnostics-scope :workspace))
+
 
 (provide 'lsp)

@@ -149,6 +149,28 @@
 
 ;; (use-package smerge-basic-map)
 
+(use-package origami
+  :ensure t
+  :demand
+  :config
+    (global-origami-mode)
+  :bind
+  (:map origami-mode-map
+   :prefix-map origami-prefix-map
+   :prefix "C-c C-f"
+   ("o" . origami-open-node)
+   ("O" . origami-open-node-recursively)
+   ("c" . origami-close-node)
+   ("C" . origami-close-node-recursively)
+   ("a" . origami-toggle-node)
+   ("A" . origami-recursively-toggle-node)
+   ("R" . origami-open-all-nodes)
+   ("M" . origami-close-all-nodes)
+   ("v" . origami-show-only-node)
+   ("k" . origami-previous-fold)
+   ("j" . origami-forward-fold)
+   ("x" . origami-reset)))
+
 (use-package undo-tree
   :config
   ;; Remember undo histor
@@ -174,5 +196,13 @@
 (use-package yasnippet
   :config
   (yas-global-mode 1))
+
+(use-package yasnippet-snippets)
+
+(use-package ansi-color)
+
+(defun display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))
 
 (provide 'base-extensions)
