@@ -1,8 +1,6 @@
 alias pashi='cd /home/krg85/Projects/pashi'
 alias pashi-core='cd /home/krg85/Projects/pashi/pashi-dsl-backend'
 alias consultproj='cd /home/krg85/Projects/consulting-calculator'
-alias consultproj='cd /home/krg85/Projects/consulting-calculator'
-alias consultproj='cd /home/krg85'
 alias pashi-lib-user='cd /home/krg85/Projects/golang/src/lib_user'
 alias emserver='/usr/bin/emacs'
 alias ssh='TERM='xterm-256color' ssh'
@@ -10,3 +8,23 @@ alias pashi-ssh='ssh -t dell@1.tcp.in.ngrok.io -p 22262 "cd /home/dell/dev/pashi
 alias gsoft='git reset HEAD'
 alias ghard='git reset --hard HEAD'
 alias cat='bat'
+alias rephrase='cd /home/krg85/Projects/rephrase-ai'
+alias rephcloud='ssh rephcloud'
+alias sync-wpb='sync-watcher ./ gpu-common.dev.gcp.rephrase.ai "~/web_panel_backend"'
+alias wpb='cd /home/krg85/Projects/rephrase-ai/web_panel_backend'
+alias rephfront='cd /home/krg85/Projects/rephrase-ai/web_panel_common'
+alias rcloud-pf='ssh -N -L 8000:127.0.0.1:8000 riteshkadmawala@gpu-common.dev.gcp.rephrase.ai'
+alias tmux-attach='tmux attach-session -t'
+alias rephttv='cd /home/krg85/Projects/rephrase-ai/ttn'
+alias conda-wpb='conda'
+alias liveth='cd /home/krg85/Projects/rephrase-ai/liveth'
+alias djshell='python'
+alias vishwakarma='ssh ubuntu@34.83.242.233'
+alias joblog='ssh rephcloud joblog'
+alias postprod='cd /home/krg85/Projects/rephrase-ai'
+alias resolution='ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0'
+alias tta='cd /home/krg85/Projects/rephrase-ai/text_to_audio && conda activate tta'
+
+wpb-scp () {
+    scp $1:~/web_panel_backend/$2 `dirname $2`
+}

@@ -90,11 +90,34 @@ fzf-git-delete() {
 	#git push  :$branch;
     else
 	git branch -d $branch
-
     fi
-
 }
+
+fzf-git-force-delete() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+    if [[ "$branch" =~ 'remotes/([^/]+)/(.+)' ]]; then
+	echo "${match[*]}"
+	git push $match[1] :$match[2]
+	#git push  :$branch;
+    else
+	git branch -D $branch
+    fi
+}
+
 
 alias gb='fzf-git-branch'
 alias gco='fzf-git-checkout'
 alias gdel='fzf-git-delete'
+alias gdel-force='fzf-git-force-delete'
+
+gdiff() {
+    git difftool --dir-diff --tool=meld "${1:-HEAD}" "${2:-HEAD~}"
+}
