@@ -13,3 +13,7 @@ emacs/.cache/
 emacs/.lsp-session-v1
 emacs/session.*
 emacs/tramp
+emacs/projects
+emacs/.mc-lists.el
+emacs/eshell/
+emacs/opam-user-setup.el

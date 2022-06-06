@@ -197,12 +197,14 @@
   :config
   (yas-global-mode 1))
 
-(use-package yasnippet-snippets)
-
 (use-package ansi-color)
+
+(use-package atomic-chrome)
 
 (defun display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
+
+(use-package just-mode)
 
 (provide 'base-extensions)

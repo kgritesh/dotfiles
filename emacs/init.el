@@ -21,7 +21,6 @@
 (require 'config-modes)
 (require 'lang-reasonml)
 (require 'lang-ocaml)
-(require 'lang-yaml)
 (put 'downcase-region 'disabled nil)
 
 ;;(require 'lang-python)

@@ -20,6 +20,12 @@
 (add-hook 'typescript-mode-hook 'prettier-mode)
 (add-hook 'js2-mode-hook 'lsp)
 (add-hook 'typescript-mode-hook 'lsp)
+(setq prettier-js-args '(
+  "--tab-width" "2"
+))
+
+(setq lsp-javascript-format-enable nil)
+
 
 
 
