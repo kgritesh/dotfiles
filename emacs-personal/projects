@@ -1,0 +1,4 @@
+;;; -*- lisp-data -*-
+(("~/Projects/rephrase-ai/web_panel_backend/")
+ ("~/Projects/pashi/pashi-dsl-backend/")
+ ("~/Projects/golang/src/lib_user/"))

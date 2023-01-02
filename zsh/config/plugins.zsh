@@ -1,8 +1,3 @@
-
-# Initialize zimfw plugin system
-export ZIM_HOME=$HOME/.zim
-[[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
-
 # fzf
 
 source /usr/share/fzf/completion.zsh

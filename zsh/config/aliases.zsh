@@ -62,7 +62,6 @@ pipfind() {
 
 
 # editor aliases
-alias emacs="emacsclient -c"
 export EDITOR="emacs"
 
 
