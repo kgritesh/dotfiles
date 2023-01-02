@@ -3,9 +3,9 @@
 # -------------------------------------------------------------------------------
 # Environment Variables
 # -------------------------------------------------------------------------------
-export EDITOR='emacsclient -c -a emacs '
+export EDITOR='emacs'
 
-export VISUAL='emacsclient -c -a emacs '
+export VISUAL='emacs'
 
 export BROWSER="/usr/bin/google-chrome-stable"
 
@@ -14,8 +14,6 @@ export DOTFILES_PATH=~/dotfiles
 export ZSH_CONFIG_PATH=$DOTFILES_PATH/zsh/config
 
 export ZSH_FUNC_PATH=$DOTFILES_PATH/zsh/funcs
-
-export VPN_CONFIG_PATH="/home/krg85/Documents/Xapo/vpn"
 
 export fpath=($ZSH_FUNC_PATH  "${fpath[@]}" )
 
@@ -34,13 +32,6 @@ source $ZSH_CONFIG_PATH/mappings.zsh
 source $ZSH_CONFIG_PATH/functions.zsh
 
 source $ZSH_CONFIG_PATH/aliases.zsh
-
-# -----------------
-# Zsh configuration
-# -----------------
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
 
 # -----------------
 # SSH Configuration

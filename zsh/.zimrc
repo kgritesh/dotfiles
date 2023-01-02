@@ -7,6 +7,7 @@
 #
 # Modules
 #
+zmodule archive
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
@@ -19,7 +20,18 @@ zmodule termtitle
 # Utility aliases and functions. Adds colour to ls, grep and less.
 zmodule utility
 
-#
+zmodule asdf
+
+zmodule fzf
+
+zmodule k
+
+zmoudle magic-enter
+
+zmodule yq
+
+zmodule pvenv
+
 # Prompt
 #
 
@@ -30,7 +42,6 @@ zmodule git-info
 # A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
 zmodule asciiship
 
-#
 # Completion
 #
 
