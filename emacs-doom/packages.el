@@ -57,3 +57,5 @@
 (package! jenkinsfile-mode)
 (package! gotest)
 (package! protobuf-mode)
+(package! rustic)
+(package! eat)

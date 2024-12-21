@@ -96,6 +96,10 @@ wifi-connect() {
 }
 
 add-alias() {
+  echo "alias $1='$2'" >> ${ZSH_CONFIG_PATH}/aliases.zsh
+}
+
+add-custom-alias() {
     echo "alias $1='$2'" >> ${ZSH_CONFIG_PATH}/.zcustom.zsh
 }
 
@@ -117,3 +121,11 @@ activateScript() {
 
 
 source ${ZSH_CONFIG_PATH}/.zcustom.zsh
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
+alias sqs-atth-msg=''
+alias sqs-atth-msg='aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/223742092451/ritesh_kadmawala-dev-atth-request-queue --message-body'
+alias glast="git rev-parse HEAD | tr -d '\n' | xcopy"
+alias disable-laptop-screen='xrandr --output eDP-1 --off'
+alias enable-laptop-screen='xrandr --output eDP-1 --auto --right-of DP-1'
+alias gfo='git fetch origin'

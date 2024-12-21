@@ -33,6 +33,8 @@ source $ZSH_CONFIG_PATH/functions.zsh
 
 source $ZSH_CONFIG_PATH/aliases.zsh
 
+source ~/.zcustom.zsh
+
 # -----------------
 # SSH Configuration
 # -----------------
