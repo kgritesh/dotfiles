@@ -9,6 +9,8 @@
     br = branch
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     add-ignore = !"g(){ url="https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore" ; curl --output /dev/null --silent --head --fail "$url" ; if [ $? -eq 0 ]; then curl "$url" >> .gitignore && echo "Appended .gitignore with $url" ; else echo "$url doesnt exist." ; fi ; }; g"
+	blame = blame -w -C -C -C
+	fpush = push
 [color]
 	ui = auto
 
@@ -24,3 +26,25 @@
 	autoSetupMerge = always
 [pull]
 	ff = only
+[init]
+	defaultBranch = master
+[user]
+	name = Ritesh Kadmawala
+	email = ritesh@vertexcover.io
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[submodule]
+	recurse = true
+[advice]
+	detachedHead = false
+[rerere]
+	enabled = true
+	autoUpdate = true
+[maintenance]
+	repo = /home/krg85/Projects/shopify-product-search
+	repo = /home/krg85/Projects/Madmen/ad-insights-data-analysis
+[column]
+	ui = auto

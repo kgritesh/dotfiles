@@ -1,5 +1,3 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -173,16 +171,6 @@
 
 
 ;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
-         ("C-<tab>" . 'copilot-accept-completion-by-word)
-         :map copilot-completion-map
-         ("<tab>" . 'copilot-accept-completion)
-         ("TAB" . 'copilot-accept-completion)))
-
-
-
 
 (defun file-notify-rm-all-watches ()
   "Remove all existing file notification watches from Emacs."
@@ -224,6 +212,8 @@
  "C-c t s" #'treemacs-select-window
  "M-o" #'xref-find-definitions-other-window
  "C-c k k" #'kill-other-buffers
+ "C-x p" #'previous-window-any-frame
+ "C-x n" #'next-window-any-frame
 )
 
 
@@ -236,3 +226,45 @@
     (when filename
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
+
+(setq lsp-eslint-server-command '("vscode-eslint-language-server" "--stdio"))
+
+(setq projectile-indexing-method 'alien)
+(setq projectile-enable-caching nil)
+
+(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+(setq-hook! 'js-mode-hook +format-with-lsp nil)
+
+(after! lsp-mode
+  ;; (setq lsp-clients-typescript-init-opts '(:importModuleSpecifierPreference "non-relative"))
+  (lsp-make-interactive-code-action organize-imports-ts "source.organizeImports.ts-ls"))
+
+(map! :after lsp-mode
+      (:map typescript-mode-map
+       "C-c C-o" #'lsp-organize-imports-ts)
+      ("C-c C-o" #'lsp-organize-imports))
+
+
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+
+(defun fontify-frame (frame)
+  (interactive)
+  (if window-system
+      (progn
+        (if (> (x-display-pixel-width) 2000)
+            (set-frame-parameter frame 'font "Fira Code 9") ;; Cinema Display
+         (set-frame-parameter frame 'font "Fira Code 7")))))
+
+;; Fontify any future frames
+(push 'fontify-frame after-make-frame-functions)
+
+;; Fontify the initial frame after initialization is complete
+(add-hook 'after-init-hook (lambda ()
+                             (fontify-frame nil)))

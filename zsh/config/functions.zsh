@@ -1,6 +1,7 @@
 
 
 
+
 ### System clipboard integration
 
 
@@ -120,4 +121,50 @@ alias gdel-force='fzf-git-force-delete'
 
 gdiff() {
     git difftool --dir-diff --tool=meld "${1:-HEAD}" "${2:-HEAD~}"
+}
+
+
+npm () {
+    if grep -sq 'pnpm' package.json; then pnpm $@; else command npm $@; fi
+}
+
+
+gitignore() {
+    for var in "$@"
+    do
+        echo "$var" >> .gitignore
+    done
+}
+
+
+rye-install() {
+    local dev_flag=""
+
+    # Check if the first argument is '--dev' and set the dev_flag
+    if [[ $1 == '--dev' ]]; then
+        dev_flag="--dev"
+        shift # Remove the first argument so only package names are left
+    fi
+
+    # Construct the rye add command with optional dev flag
+    local rye_add_cmd="rye add $dev_flag $*"
+
+    # Execute the command and then run rye sync
+    eval "$rye_add_cmd && rye sync"
+}
+
+ rye-uninstall() {
+    local dev_flag=""
+
+    # Check if the first argument is '--dev' and set the dev_flag
+    if [[ $1 == '--dev' ]]; then
+        dev_flag="--dev"
+        shift # Remove the first argument so only package names are left
+    fi
+
+    # Construct the rye remove command with optional dev flag
+    local rye_remove_cmd="rye remove $dev_flag $*"
+
+    # Execute the command and then run rye sync
+    eval "$rye_remove_cmd && rye sync"
 }

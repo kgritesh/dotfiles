@@ -28,3 +28,30 @@ alias tta='cd /home/krg85/Projects/rephrase-ai/text_to_audio && conda activate t
 wpb-scp () {
     scp $1:~/web_panel_backend/$2 `dirname $2`
 }
+alias dc='docker-compose'
+alias uc='cd /home/krg85/Projects/Dhiwise/unified-components'
+alias rve='cd /home/krg85/Projects/rephrase-ai/video-engine'
+alias rvecomp='cd /home/krg85/Projects/rephrase-ai/video-engine/packages/video-components'
+alias atth='cd /home/krg85/Projects/rephrase-ai/atth'
+alias job-folders='cd /home/krg85/Downloads/job-folders'
+
+aws-stop-instance () {
+    echo "Stopping instance $1"
+    aws ec2 describe-instances --filters "Name=tag:Name,Values=${1}" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].InstanceId" --output text | xargs aws ec2 stop-instances --instance-ids
+}
+
+aws-start-instance () {
+    aws ec2 describe-instances --filters "Name=tag:Name,Values=$1" "Name=instance-state-name,Values=stopped" --query "Reservations[*].Instances[*].InstanceId" --output text | xargs aws ec2 start-instances --instance-ids
+}
+alias postprod='cd /home/krg85/Projects/rephrase-ai/video-engine/packages/postprod'
+alias video-engine='cd /home/krg85/Projects/rephrase-ai/video-engine'
+alias rephcomp='cd /home/krg85/Projects/rephrase-ai/video-engine/packages/video-components'
+alias gategpt='cd /home/krg85/Projects/custom-gpts-paywall'
+alias ecj='cd /home/krg85/Projects/ecj-backend'
+alias shopist='cd /home/krg85/Projects/shopify-product-search'
+alias albus-be='cd /home/krg85/Projects/Springworks/albus-be'
+alias dobby-be='cd /home/krg85/Projects/Springworks/dobby-be'
+alias flowtest='cd /home/krg85/Projects/flowtest'
+alias odn='cd /home/krg85/Projects/odn/odn-postprod'
+alias madmen='cd /home/krg85/Projects'
+alias americana='cd /home/krg85/Projects/attributics/americana-360'

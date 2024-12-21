@@ -26,9 +26,7 @@ zmodule fzf
 
 zmodule k
 
-zmoudle magic-enter
-
-zmodule yq
+zmodule magic-enter
 
 zmodule pvenv
 
