@@ -1,9 +1,2 @@
-# Not open in fullscreen mode
-
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude "{.git,node_modules}"'
-
-source /usr/share/fzf/completion.zsh
-
-source /usr/share/fzf/key-bindings.zsh
+source ${ZSH_SHARE_PATH}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${ZSH_SHARE_PATH}/zsh-autosuggestions/zsh-autosuggestions.zsh

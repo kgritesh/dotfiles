@@ -1,133 +1,10 @@
-
-
-
-
-### System clipboard integration
-
-
-### Profile Clipboard
-
 zshtime(){
     for i in $(seq 1 10); do time  zsh -i -c exit; done
 }
 
-
-###fzf Aliases
-
-# Kill process using fzf
-
-fkill() {
-    local pid
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
-    else
-        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-    fi
-
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-9}
-    fi
-}
-
-
-# Open the selected file
-
-fo() (
-  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  echo $file
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || emacs "$file"
-  fi
-)
-
-# Taken from https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
-fzf-git-branch() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    git branch --color=always --all --sort=-committerdate |
-        grep -v HEAD |
-        fzf --height 50% --ansi --no-multi --preview-window right:65% \
-            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
-        sed "s/.* //"
-}
-
-fzf-git-checkout() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    local branch
-
-    branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
-        echo "No branch selected."
-        return
-    fi
-
-    # If branch name starts with 'remotes/' then it is a remote branch. By
-    # using --track and a remote branch name, it is the same as:
-    # git checkout -b branchName --track origin/branchName
-    if [[ "$branch" = 'remotes/'* ]]; then
-        git checkout --track $branch
-    else
-        git checkout $branch;
-    fi
-}
-
-fzf-git-delete() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    local branch
-
-    branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
-        echo "No branch selected."
-        return
-    fi
-    if [[ "$branch" =~ 'remotes/([^/]+)/(.+)' ]]; then
-	echo "${match[*]}"
-	git push $match[1] :$match[2]
-	#git push  :$branch;
-    else
-	git branch -d $branch
-    fi
-}
-
-fzf-git-force-delete() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    local branch
-
-    branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
-        echo "No branch selected."
-        return
-    fi
-    if [[ "$branch" =~ 'remotes/([^/]+)/(.+)' ]]; then
-	echo "${match[*]}"
-	git push $match[1] :$match[2]
-	#git push  :$branch;
-    else
-	git branch -D $branch
-    fi
-}
-
-
-alias gb='fzf-git-branch'
-alias gco='fzf-git-checkout'
-alias gdel='fzf-git-delete'
-alias gdel-force='fzf-git-force-delete'
-
-gdiff() {
-    git difftool --dir-diff --tool=meld "${1:-HEAD}" "${2:-HEAD~}"
-}
-
-
 npm () {
     if grep -sq 'pnpm' package.json; then pnpm $@; else command npm $@; fi
 }
-
 
 gitignore() {
     for var in "$@"
@@ -136,35 +13,81 @@ gitignore() {
     done
 }
 
-
-rye-install() {
-    local dev_flag=""
-
-    # Check if the first argument is '--dev' and set the dev_flag
-    if [[ $1 == '--dev' ]]; then
-        dev_flag="--dev"
-        shift # Remove the first argument so only package names are left
-    fi
-
-    # Construct the rye add command with optional dev flag
-    local rye_add_cmd="rye add $dev_flag $*"
-
-    # Execute the command and then run rye sync
-    eval "$rye_add_cmd && rye sync"
+activateScript() {
+  for var in "$@"
+  do
+    DIR="$( cd "$( dirname $var )" && pwd )"
+    sudo ln -s $DIR/"$var" /usr/bin/
+  done
 }
 
- rye-uninstall() {
-    local dev_flag=""
 
-    # Check if the first argument is '--dev' and set the dev_flag
-    if [[ $1 == '--dev' ]]; then
-        dev_flag="--dev"
-        shift # Remove the first argument so only package names are left
+_add_alias_to_file() {
+    local alias_name="$1"
+    local alias_command="$2"
+    local target_file="$3"
+
+    if grep -q "^alias $alias_name=" "$target_file" 2>/dev/null; then
+        echo "Alias '$alias_name' already exists in $target_file."
+        return 1
     fi
 
-    # Construct the rye remove command with optional dev flag
-    local rye_remove_cmd="rye remove $dev_flag $*"
+    echo "$alias_command" >> "$target_file"
+    echo "Alias '$alias_name' added to $target_file."
 
-    # Execute the command and then run rye sync
-    eval "$rye_remove_cmd && rye sync"
+    source "$target_file"
+}
+
+# Function to add a general alias to aliases.zsh
+add-alias() {
+    if [ "$#" -ne 2 ]; then
+        echo "Usage: add-alias alias_name command"
+        return 1
+    fi
+
+    local alias_name="$1"
+    local command="$2"
+    local target_file="${ZSH_CONFIG_PATH}/aliases.zsh"
+    local alias_line="alias $alias_name='$command'"
+
+    _add_alias_to_file "$alias_name" "$alias_line" "$target_file"
+}
+
+# Function to add a custom alias to .zcustom.sh
+add-custom-alias() {
+    if [ "$#" -ne 2 ]; then
+        echo "Usage: add-custom-alias alias_name command"
+        return 1
+    fi
+
+    local alias_name="$1"
+    local command="$2"
+    local target_file="${ZSH_CONFIG_PATH}/.zcustom.zsh"
+    local alias_line="alias $alias_name='$command'"
+
+    _add_alias_to_file "$alias_name" "$alias_line" "$target_file"
+}
+
+add-path-alias() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: add-path-alias alias_name"
+        return 1
+    fi
+
+    local alias_name="$1"
+    local current_path="$(pwd)"
+    local target_file="${ZSH_CONFIG_PATH}/.zcustom.zsh"
+    local alias_line="alias $alias_name='cd $current_path'"
+
+    _add_alias_to_file "$alias_name" "$alias_line" "$target_file"
+}
+
+running() {
+    ps -ef | grep $1
+}
+
+# Python Alias
+
+pipfind() {
+    pip freeze | grep $1
 }
