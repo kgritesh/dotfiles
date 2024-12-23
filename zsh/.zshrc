@@ -11,6 +11,12 @@ fi
 if [[ "$(uname)" == "Darwin" ]]; then
     source "${ZDOTDIR}/.zmacos.zsh"
 fi
+
+export fpath=($ZSH_FUNC_PATH  $fpath )
+
+autoload -Uz compinit
+compinit
+
 source $ZSH_CONFIG_PATH/plugins.zsh
 
 source $ZSH_CONFIG_PATH/options.zsh

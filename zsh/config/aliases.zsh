@@ -62,3 +62,4 @@ alias drmi="docker image prune -f"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffprobe="ffprobe -hide_banner"
 alias sqs-atth-msg='aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/223742092451/ritesh_kadmawala-dev-atth-request-queue --message-body'
+alias hub='git'
