@@ -18,3 +18,5 @@ emacs/.mc-lists.el
 emacs/eshell/
 emacs/opam-user-setup.el
 zsh/.zcustom.sh
+.zompdump
+zsh/.zcompdump
