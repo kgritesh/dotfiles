@@ -1,5 +1,6 @@
 [core]
 	excludesfile = ~/.gitignore
+	editor = zed --wait
 
 [alias]
     amend = commit -a --amend --no-edit
@@ -48,3 +49,5 @@
 	repo = /home/krg85/Projects/Madmen/ad-insights-data-analysis
 [column]
 	ui = auto
+[hub]
+	protocol = https

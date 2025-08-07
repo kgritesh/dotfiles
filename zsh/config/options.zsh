@@ -78,7 +78,14 @@ unsetopt CASE_GLOB
 # -------------------------------------------------------------------------------
 # Misc
 # -------------------------------------------------------------------------------
-# Silecnces beeps
+# Silences beeps
 setopt NO_BEEP
 
+# Spelling correction for commands
 setopt CORRECT
+
+# Expand globs instead of passing them literally  
+setopt GLOB_COMPLETE
+
+# Don't exit on EOF (Ctrl+D)
+setopt IGNORE_EOF

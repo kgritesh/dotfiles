@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo $fpath)",
+      "Bash(bindkey)",
+      "Bash(zstyle:*)",
+      "Bash(source:*)",
+      "Bash(echo:*)",
+      "Bash(alias:*)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": []
+  }
+}
