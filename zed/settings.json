@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "auto_update_extensions": {
+    "html": false
+  },
   "assistant": {
     "default_model": {
       "provider": "copilot_chat",
