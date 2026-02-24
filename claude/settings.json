@@ -66,8 +66,7 @@
       "Bash(env:*)",
       "Bash(printenv:*)",
       "Bash(passwd:*)",
-      "Bash(history:*)",
-      "Bash(git push:*)"
+      "Bash(history:*)"
     ]
   },
   "hooks": {
