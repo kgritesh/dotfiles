@@ -12,6 +12,8 @@
     add-ignore = !"g(){ url="https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore" ; curl --output /dev/null --silent --head --fail "$url" ; if [ $? -eq 0 ]; then curl "$url" >> .gitignore && echo "Appended .gitignore with $url" ; else echo "$url doesnt exist." ; fi ; }; g"
 	blame = blame -w -C -C -C
 	fpush = push
+	rebase-master = !git fetch origin master && git rebase origin/master
+	rebase-main = !git fetch origin main && git rebase origin/main
 [color]
 	ui = auto
 
