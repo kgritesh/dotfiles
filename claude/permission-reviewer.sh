@@ -32,6 +32,19 @@ if echo "$TOOL_NAME" | grep -qE '^mcp__.*(create|update|delete|add_message|write
   exit 0
 fi
 
+# --- Git push guards: always ask user for confirmation ---
+if [ "$TOOL_NAME" = "Bash" ]; then
+  CMD=$(echo "$TOOL_INPUT" | jq -r '.command // empty')
+  if echo "$CMD" | grep -qE 'git\s+push\s+.*--force|git\s+push\s+-f\b'; then
+    log "GUARD: force push detected, asking user"
+    exit 0
+  fi
+  if echo "$CMD" | grep -qE 'git\s+push\s+.*(main|master)\b'; then
+    log "GUARD: push to main/master detected, asking user"
+    exit 0
+  fi
+fi
+
 # --- Cache lookup ---
 # Build cache key from security-relevant fields only (exclude description, timeout, etc.)
 if [ "$TOOL_NAME" = "Bash" ]; then
