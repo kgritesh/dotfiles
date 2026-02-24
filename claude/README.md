@@ -37,11 +37,11 @@ The global `CLAUDE.md` file provides instructions that Claude Code follows acros
 
 Configures Claude Code's runtime behavior:
 
-- **Permissions** — Pre-approved read-only tools (git, grep, find, jq, etc.) and blocked dangerous commands (sudo, ssh, curl, network tools, `git push`)
-- **Deny rules** — Prevents reading dotfiles, `.env` files, `~/Library`, `/etc`, and other sensitive paths
-- **Hooks** — Permission request reviewer via custom script
+- **Permissions** — Pre-approved read-only tools (git, grep, find, jq, etc.) and blocked dangerous commands (sudo, `git push`)
+- **Deny rules** — Prevents reading dotfiles, `~/Library`, `/etc`, and other sensitive paths
+- **Hooks** — AI-powered permission reviewer that handles .env protection (suggests `env-safe` CLI and `source .env`), git add safety (blocks blanket staging, asks for untracked files), and general security review
 - **Status line** — Uses [ccstatusline](https://www.npmjs.com/package/ccstatusline)
-- **Plugins** — safety-hooks and skill-creator enabled
+- **Plugins** — skill-creator enabled
 
 ## Skills
 

@@ -54,7 +54,6 @@
     ],
     "deny": [
       "Read(~/.*)",
-      "Read(*.env)",
       "Edit(~/.*)",
       "Read(~/Library/**)",
       "Edit(~/Library/**)",
@@ -68,17 +67,6 @@
       "Bash(printenv:*)",
       "Bash(passwd:*)",
       "Bash(history:*)",
-      "Bash(curl:*)",
-      "Bash(wget:*)",
-      "Bash(rsync:*)",
-      "Bash(scp:*)",
-      "Bash(sftp:*)",
-      "Bash(socat:*)",
-      "Bash(ssh:*)",
-      "Bash(nc:*)",
-      "Bash(ncat:*)",
-      "Bash(netcat:*)",
-      "Bash(nmap:*)",
       "Bash(git push:*)"
     ]
   },
@@ -89,7 +77,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/vertexcover/Projects/claude-code-utils/hooks/permission-reviewer.sh"
+            "command": "/Users/vertexcover/Projects/dotfiles/claude/permission-reviewer.sh"
           }
         ]
       }
@@ -101,7 +89,6 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "safety-hooks@cctools-plugins": true,
     "skill-creator@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": false,
