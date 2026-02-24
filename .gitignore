@@ -20,3 +20,5 @@ emacs/opam-user-setup.el
 zsh/.zcustom.sh
 .zompdump
 zsh/.zcompdump
+.zcompdump.*
+.zsh_sessions
