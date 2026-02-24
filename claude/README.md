@@ -39,7 +39,7 @@ Configures Claude Code's runtime behavior:
 
 - **Permissions** — Pre-approved read-only tools (git, grep, find, jq, etc.) and blocked dangerous commands (sudo, `git push`)
 - **Deny rules** — Prevents reading dotfiles, `~/Library`, `/etc`, and other sensitive paths
-- **Hooks** — AI-powered permission reviewer that handles .env protection (suggests `env-safe` CLI and `source .env`), git add safety (blocks blanket staging, asks for untracked files), and general security review
+- **Hooks** — AI-powered permission reviewer for grey-area tool calls (not matched by allow/deny rules). Handles .env protection, blanket git add safety, and general security review. Caches decisions for 1 hour to avoid redundant model calls
 - **Status line** — Uses [ccstatusline](https://www.npmjs.com/package/ccstatusline)
 - **Plugins** — skill-creator enabled
 
