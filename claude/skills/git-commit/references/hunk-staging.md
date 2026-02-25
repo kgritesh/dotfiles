@@ -2,12 +2,17 @@
 
 When you need to stage specific hunks from a file (not the whole file), use these approaches.
 
+## Important: Minimize Git Diff Calls
+
+You already have the full diff from Step 1's `git diff -U5`. Extract the per-file sections from that output instead of running `git diff <file>` again. Only run a new `git diff` call if you need to generate a patch file for `git apply`.
+
 ## Simple Case: Few Hunks, Clear Boundaries
 
-Save the full diff, filter it to keep only desired hunks, and apply:
+Extract the file's section from your full diff output, filter to keep only desired hunks, and apply:
 
 ```bash
-# 1. Save full diff for the file
+# 1. Extract the file's diff from the full diff and save as patch
+#    (or run git diff <file> only if you need a fresh patch for staging)
 git diff <file> > /tmp/file.patch
 
 # 2. Edit the patch to keep only desired @@ blocks
@@ -17,14 +22,13 @@ git diff <file> > /tmp/file.patch
 # 3. Apply filtered patch to staging area only
 git apply --cached /tmp/file_filtered.patch
 
-# 4. Verify
-git diff --cached <file>   # only intended changes are staged
-git diff <file>            # remaining changes still in working tree
+# 4. Verify with a single stat check
+git diff --cached --stat
 ```
 
 ## Using Python for Patch Filtering
 
-For programmatic hunk selection:
+For programmatic hunk selection when you need to split a file across commits:
 
 ```python
 import subprocess, re
@@ -63,9 +67,8 @@ If hunk splitting gets complicated, it's often better to ask the user whether to
 
 ## Verification
 
-Always verify after staging:
+Verify after each commit's staging with a single stat check:
 
 ```bash
-git diff --cached <file>  # confirm staged content
-git diff <file>           # confirm unstaged remainder
+git diff --cached --stat  # confirm what's staged
 ```

@@ -19,14 +19,16 @@ Analyze a dirty working tree, understand the intent behind changes, group relate
 
 ### Step 1: Reconnaissance
 
-Gather the full picture before making decisions.
+Gather the full picture before making decisions. Run these commands — they give you everything you need in a few calls:
 
 ```bash
 git status --porcelain
-git diff -U5
-git diff --cached --stat
+git diff -U5                # all unstaged changes in one shot
+git diff --cached -U5       # all staged changes in one shot
 git log --oneline -10
 ```
+
+**Do not run `git diff` per file.** The single `git diff -U5` output contains every modified file's hunks. Work from this combined output throughout the entire workflow — there's no need to re-diff individual files during analysis or grouping.
 
 Also check for commit convention configs (`commitlint.config.*`, `.czrc`, `CONTRIBUTING.md`). Match whatever conventions the project already uses — consistency with the repo matters more than any spec.
 
@@ -34,7 +36,9 @@ Classify every path: modified tracked files, untracked files, deletions, already
 
 ### Step 2: Understand Intent
 
-Read the diffs and figure out what the developer was trying to do. Start with test files — test names are the strongest signal for intent (`test('should reject invalid email')` tells you this is about email validation).
+Work from the diff output you already captured in Step 1 — don't run additional diff commands per file.
+
+Figure out what the developer was trying to do. Start with test files — test names are the strongest signal for intent (`test('should reject invalid email')` tells you this is about email validation).
 
 Then read implementation diffs. Use file proximity as a grouping signal — changes in the same module/directory usually belong together unless the diff shows otherwise.
 
