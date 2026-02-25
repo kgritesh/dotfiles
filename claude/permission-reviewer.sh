@@ -26,6 +26,19 @@ fi
 
 log "HOOK FIRED: tool=$TOOL_NAME cwd=$CWD"
 
+# --- Auto-approve meta tools with no security implications ---
+if echo "$TOOL_NAME" | grep -qE '^(EnterPlanMode|TaskCreate|TaskUpdate|TaskGet|TaskList|Skill|NotebookEdit)$'; then
+  log "AUTO-APPROVE: $TOOL_NAME is a meta tool"
+  echo '{"hookSpecificOutput":{"hookEventName":"PermissionRequest","decision":{"behavior":"allow"}}}'
+  exit 0
+fi
+
+# --- User-interaction tools: skip reviewer, let user decide ---
+if echo "$TOOL_NAME" | grep -qE '^(ExitPlanMode|AskUserQuestion)$'; then
+  log "SKIP: $TOOL_NAME requires user interaction, falling through to manual approval"
+  exit 0
+fi
+
 # --- Always ask user for MCP write operations on external services ---
 if echo "$TOOL_NAME" | grep -qE '^mcp__.*(create|update|delete|add_message|write|push|merge|assign|move|duplicate)'; then
   log "SKIP: MCP write operation, falling through to manual approval"
