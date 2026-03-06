@@ -184,7 +184,7 @@ Before producing the design, explicitly check for thinking gaps:
 ### Phase 6: Design Synthesis and Documentation
 
 Produce the design document. Read `references/design-template.md` for the full template.
-Save to `docs/plans/YYYY-MM-DD-<topic>-design.md`.
+Save to `docs/design/YYYY-MM-DD-<topic>-design.md`.
 
 Present the design to the user **section by section**, getting approval on each before
 moving on. This catches misunderstandings early.
