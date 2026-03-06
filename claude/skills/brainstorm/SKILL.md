@@ -28,6 +28,20 @@ a rushed design without understanding produces rework.
 **Hard gate:** No code, scaffolding, or implementation occurs until the design receives
 explicit user approval. This applies regardless of how "simple" the problem appears.
 
+## Plan Mode
+
+**Call `EnterPlanMode` at the very start of brainstorming.** Plan mode is the right
+environment for this skill — it enables codebase exploration (Read, Glob, Grep) while
+preventing premature code changes (Edit, Write are disabled). This aligns perfectly
+with the brainstorm's purpose: understand deeply, don't implement yet.
+
+When the design document is complete and ready for user review, call `ExitPlanMode`
+to present it for approval. The user reviews the design and either approves or requests
+changes. If they request changes, continue in plan mode and call `ExitPlanMode` again
+when revisions are ready.
+
+**Flow:** `EnterPlanMode` → Explore & Design (Phases 1-6) → `ExitPlanMode` (Phase 7)
+
 ## Depth Scaling
 
 Not every problem needs the same depth. Scale the brainstorming to the problem:
@@ -180,6 +194,9 @@ edge cases), Key Insights, Architectural Challenges, Approaches Considered, Chos
 High-Level Design, Open Questions, Risks and Mitigations, and Assumptions.
 
 ### Phase 7: Design Approval and Transition
+
+Call `ExitPlanMode` to present the design for user approval. This exits plan mode and
+shows the design document for review.
 
 The design must be explicitly approved before any implementation begins.
 

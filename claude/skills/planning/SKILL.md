@@ -21,6 +21,19 @@ lets you work on early phases while refining later ones in parallel sessions.
 
 **Announce at start:** "Using the planning skill to create an implementation plan."
 
+## Plan Mode
+
+**Call `EnterPlanMode` at the very start of planning.** Plan mode enables codebase
+exploration (Read, Glob, Grep) while preventing premature code changes (Edit, Write
+are disabled). This is exactly what planning needs — deep exploration without
+accidentally implementing anything.
+
+Write the plan documents during plan mode. When the plan is ready for user review,
+call `ExitPlanMode` to present plan.md for approval. If the user requests changes,
+continue in plan mode and call `ExitPlanMode` again when revisions are ready.
+
+**Flow:** `EnterPlanMode` → Explore & Plan (Steps 1-4) → `ExitPlanMode` for approval
+
 **Plan output:**
 ```
 docs/plans/<feature-name>/
@@ -79,8 +92,8 @@ probably two features and should be split.
 
 ### Step 4: Write the Plan Documents
 
-Create the folder and write all documents. Present plan.md to the user for approval
-before finalizing phase files.
+Create the folder and write all documents. Call `ExitPlanMode` to present plan.md
+to the user for approval before finalizing phase files.
 
 ---
 
