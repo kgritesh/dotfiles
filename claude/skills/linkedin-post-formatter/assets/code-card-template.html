@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d1117;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    width: 680px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  .titlebar {
+    background: #1c2128;
+    border-bottom: 1px solid #30363d;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #febc2e; }
+  .dot.green { background: #28c840; }
+
+  .titlebar-text {
+    color: #7d8590;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 12px;
+    margin-left: 8px;
+  }
+
+  .content {
+    padding: 24px 24px 28px;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  .step { margin-bottom: 20px; }
+  .step:last-child { margin-bottom: 0; }
+
+  .comment { color: #7d8590; }
+  .command { color: #e6edf3; }
+  .prompt { color: #3fb950; user-select: none; }
+  .flag { color: #79c0ff; }
+  .path { color: #ffa657; }
+  .url { color: #d2a8ff; }
+  .string { color: #a5d6ff; }
+  .keyword { color: #ff7b72; }
+  .output { color: #7d8590; font-style: italic; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="titlebar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span class="titlebar-text">__TITLEBAR_TEXT__</span>
+    </div>
+    <div class="content">
+      __CODE_CONTENT__
+    </div>
+  </div>
+</body>
+</html>
