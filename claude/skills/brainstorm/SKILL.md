@@ -28,19 +28,17 @@ a rushed design without understanding produces rework.
 **Hard gate:** No code, scaffolding, or implementation occurs until the design receives
 explicit user approval. This applies regardless of how "simple" the problem appears.
 
-## Plan Mode
+## Workflow
 
-**Call `EnterPlanMode` at the very start of brainstorming.** Plan mode is the right
-environment for this skill — it enables codebase exploration (Read, Glob, Grep) while
-preventing premature code changes (Edit, Write are disabled). This aligns perfectly
-with the brainstorm's purpose: understand deeply, don't implement yet.
+Brainstorming uses the full tool palette — Read, Glob, Grep for codebase exploration,
+and Write to produce the design document. The discipline is behavioral, not enforced
+by tool restrictions: explore and understand deeply before writing anything.
 
-When the design document is complete and ready for user review, call `ExitPlanMode`
-to present it for approval. The user reviews the design and either approves or requests
-changes. If they request changes, continue in plan mode and call `ExitPlanMode` again
-when revisions are ready.
+**Do not call `EnterPlanMode`.** Write the design document directly to the project's
+design folder using Write. Present a summary in conversation for the user to approve
+or request changes.
 
-**Flow:** `EnterPlanMode` → Explore & Design (Phases 1-6) → `ExitPlanMode` (Phase 7)
+**Flow:** Explore & Design (Phases 1-6) → Write design doc → Present summary (Phase 7)
 
 ## Depth Scaling
 
@@ -184,7 +182,10 @@ Before producing the design, explicitly check for thinking gaps:
 ### Phase 6: Design Synthesis and Documentation
 
 Produce the design document. Read `references/design-template.md` for the full template.
-Save to `docs/design/YYYY-MM-DD-<topic>-design.md`.
+
+**Where to save:** Check the project's CLAUDE.md for a configured design/docs path.
+If none is specified, default to `docs/design/YYYY-MM-DD-<topic>-design.md` relative
+to the project root. Write the file directly using the Write tool.
 
 Present the design to the user **section by section**, getting approval on each before
 moving on. This catches misunderstandings early.
@@ -195,10 +196,9 @@ High-Level Design, Open Questions, Risks and Mitigations, and Assumptions.
 
 ### Phase 7: Design Approval and Transition
 
-Call `ExitPlanMode` to present the design for user approval. This exits plan mode and
-shows the design document for review.
-
-The design must be explicitly approved before any implementation begins.
+Present a summary of the design document in conversation for user approval. Include
+the file path so they can review the full document. The design must be explicitly
+approved before any implementation begins.
 
 After approval, offer to transition into implementation planning — breaking the design
 into concrete tasks. If a planning skill is available, invoke it with the design document

@@ -4,7 +4,9 @@ Use this template when producing the design document in Phase 6. Scale sections
 to the problem — a minor feature might have 2-3 sentence sections, a major
 architectural change might have full paragraphs with diagrams.
 
-Save to `docs/design/YYYY-MM-DD-<topic>-design.md`.
+Check the project's CLAUDE.md for a configured design/docs path. If none is
+specified, default to `docs/design/YYYY-MM-DD-<topic>-design.md` relative to
+the project root.
 
 ```markdown
 # <Topic> — Design

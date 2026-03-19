@@ -21,20 +21,16 @@ lets you work on early phases while refining later ones in parallel sessions.
 
 **Announce at start:** "Using the planning skill to create an implementation plan."
 
-## Plan Mode
+## Workflow
 
-**Call `EnterPlanMode` at the very start of planning.** Plan mode enables codebase
-exploration (Read, Glob, Grep) while preventing premature code changes (Edit, Write
-are disabled). This is exactly what planning needs — deep exploration without
-accidentally implementing anything.
+**Do not call `EnterPlanMode`.** Write plan documents directly using the Write tool.
+Explore the codebase freely with Read, Glob, and Grep, then write the plan files.
+Present a summary in conversation for the user to approve or request changes.
 
-Write the plan documents during plan mode. When the plan is ready for user review,
-call `ExitPlanMode` to present plan.md for approval. If the user requests changes,
-continue in plan mode and call `ExitPlanMode` again when revisions are ready.
+**Flow:** Explore & Plan (Steps 1-4) → Write plan docs → Present summary for approval
 
-**Flow:** `EnterPlanMode` → Explore & Plan (Steps 1-4) → `ExitPlanMode` for approval
-
-**Plan output:**
+**Plan output location:** Check the project's CLAUDE.md for a configured plans/docs
+path. If none is specified, default to:
 ```
 docs/plans/<feature-name>/
 ├── plan.md          # Overview — what each phase achieves
@@ -92,8 +88,8 @@ probably two features and should be split.
 
 ### Step 4: Write the Plan Documents
 
-Create the folder and write all documents. Call `ExitPlanMode` to present plan.md
-to the user for approval before finalizing phase files.
+Create the folder and write all documents using the Write tool. Present a summary
+of plan.md in conversation for the user to approve before finalizing phase files.
 
 ---
 
