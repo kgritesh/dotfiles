@@ -64,3 +64,4 @@ alias ffprobe="ffprobe -hide_banner"
 alias sqs-atth-msg='aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/223742092451/ritesh_kadmawala-dev-atth-request-queue --message-body'
 alias git="hub"
 alias jsonl-map='jq -s "."'
+copy-path() { realpath "$1" | pbcopy }

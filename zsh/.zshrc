@@ -96,3 +96,5 @@ if [ -f '/Users/vertexcover/Applications/google-cloud-sdk/path.zsh.inc' ]; then 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/vertexcover/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/vertexcover/Applications/google-cloud-sdk/completion.zsh.inc'; fi
+
+compdef _files copy-path
