@@ -50,7 +50,20 @@
       "WebFetch",
       "WebSearch",
       "Edit(~/.claude/**)",
-      "Read(~/.claude/**)"
+      "Read(~/.claude/**)",
+      "mcp__postgres_prod__list_tables",
+      "Bash(open:*)",
+      "Bash(cd * && git status *)",
+      "Bash(cd * && git log *)",
+      "Bash(cd * && git diff *)",
+      "Bash(cd * && git show *)",
+      "Bash(cd * && git fetch *)",
+      "Bash(cd * && git branch *)",
+      "Bash(cd * && git merge-base *)",
+      "Bash(yarn analyze-session:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(yarn --cwd apps/video-agent langfuse:*)"
     ],
     "deny": [
       "Read(~/.*)",
@@ -67,7 +80,8 @@
       "Bash(printenv:*)",
       "Bash(passwd:*)",
       "Bash(history:*)"
-    ]
+    ],
+    "defaultMode": "default"
   },
   "hooks": {
     "PermissionRequest": [
