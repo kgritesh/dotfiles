@@ -80,7 +80,7 @@
       // xref
       "alt-.": "editor::GoToDefinition",
       "alt-ctrl-.": "editor::GoToDefinitionSplit",
-      "ctrl-\\": "editor::ShowInlineCompletion",
+      "ctrl-\\": "editor::ShowEditPrediction",
       "alt-o": "editor::GoToDefinitionSplit",
       "alt-?": "editor::FindAllReferences",
       "alt-,": "pane::GoBack",
@@ -94,7 +94,7 @@
       // iedit
       "ctrl-;": "editor::Rename",
       "ctrl-c n": "editor::GoToHunk",
-      "ctrl-c p": "editor::GoToPrevHunk",
+      "ctrl-c p": "editor::GoToPreviousHunk",
       "ctrl-c ctrl-d": "editor::Hover",
       "ctrl-c d": "editor::DuplicateLineDown",
       "ctrl-c r": "editor::RevealInFileManager",
@@ -121,8 +121,8 @@
       "ctrl-a": "search::SelectAllMatches",
       "ctrl-s": "search::SelectNextMatch",
       "ctrl-n": "search::SelectNextMatch",
-      "ctrl-r": "search::SelectPrevMatch",
-      "ctrl-p": "search::SelectPrevMatch",
+      "ctrl-r": "search::SelectPreviousMatch",
+      "ctrl-p": "search::SelectPreviousMatch",
       "ctrl-c": "search::ToggleCaseSensitive",
       "alt-w": "search::ToggleWholeWord",
       "ctrl-x": "search::ToggleRegex",
@@ -139,7 +139,7 @@
       "ctrl-x 2": "pane::SplitDown",
       "ctrl-x 3": "pane::SplitRight",
       "ctrl-x k": "pane::CloseActiveItem",
-      "ctrl-x b": "pane::ActivatePrevItem",
+      "ctrl-x b": "pane::ActivatePreviousItem",
       "ctrl-x f": "pane::ActivateNextItem",
       "ctrl-alt-o": "outline_panel::ToggleFocus",
       // isearch
@@ -157,7 +157,7 @@
       "ctrl-shift-t": "pane::ReopenClosedItem",
       "ctrl-c ctrl-l": "diagnostics::Deploy",
       "ctrl-c ctrl-n": "editor::GoToDiagnostic",
-      "ctrl-c ctrl-p": "editor::GoToPrevDiagnostic",
+      "ctrl-c ctrl-p": "editor::GoToPreviousDiagnostic",
       // Custom
       "ctrl-0": "pane::ActivateLastItem",
       "ctrl-1": ["pane::ActivateItem", 0],
@@ -196,8 +196,8 @@
   {
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
-      "up": "editor::ContextMenuPrev",
-      "ctrl-p": "editor::ContextMenuPrev",
+      "up": "editor::ContextMenuPrevious",
+      "ctrl-p": "editor::ContextMenuPrevious",
       "down": "editor::ContextMenuNext",
       "ctrl-n": "editor::ContextMenuNext",
       "alt-<": "editor::ContextMenuFirst",
@@ -213,8 +213,8 @@
       "ctrl-shift-w": "outline_panel::CopyRelativePath",
       "ctrl-r": "outline_panel::RevealInFileManager",
       "ctrl-n": "menu::SelectNext",
-      "ctrl-p": "menu::SelectPrev",
-      "ctrl-o": "outline_panel::Open"
+      "ctrl-p": "menu::SelectPrevious",
+      "ctrl-o": "outline_panel::OpenSelectedEntry"
     }
   },
   {
@@ -257,7 +257,7 @@
       "ctrl-r": "project_panel::RevealInFileManager",
       "alt-shift-f": "project_panel::NewSearchInDirectory",
       "ctrl-n": "menu::SelectNext",
-      "ctrl-p": "menu::SelectPrev",
+      "ctrl-p": "menu::SelectPrevious",
       "escape": "menu::Cancel"
     }
   },
