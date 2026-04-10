@@ -98,3 +98,4 @@ if [ -f '/Users/vertexcover/Applications/google-cloud-sdk/path.zsh.inc' ]; then 
 if [ -f '/Users/vertexcover/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/vertexcover/Applications/google-cloud-sdk/completion.zsh.inc'; fi
 
 compdef _files copy-path
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi

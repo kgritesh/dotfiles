@@ -17,6 +17,7 @@ gdiff() {
 }
 alias glast="git rev-parse HEAD | tr -d '\n' | xcopy"
 alias gfo='git fetch origin'
+alias lg='lazygit'
 
 # Misc
 alias cat='bat'
