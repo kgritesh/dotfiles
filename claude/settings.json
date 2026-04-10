@@ -81,29 +81,17 @@
       "Bash(passwd:*)",
       "Bash(history:*)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
-  "hooks": {
-    "PermissionRequest": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/vertexcover/Projects/dotfiles/claude/permission-reviewer.sh"
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
+"statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
     "padding": 0
   },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
-    "harness@harness": true
+    "harness@harness": true,
+    "visual-explainer@visual-explainer-marketplace": true
   },
   "extraKnownMarketplaces": {
     "harness": {
@@ -111,11 +99,18 @@
         "source": "directory",
         "path": "/Users/vertexcover/Projects/harness-engineering"
       }
+    },
+    "visual-explainer-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "nicobailon/visual-explainer"
+      }
     }
   },
   "alwaysThinkingEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754331774684
-  }
+  },
+  "skipAutoPermissionPrompt": true
 }
