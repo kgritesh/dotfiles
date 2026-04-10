@@ -1,6 +1,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = zed --wait
+	pager = delta
 
 [alias]
     amend = commit -a --amend --no-edit
@@ -14,6 +15,9 @@
 	fpush = push
 	rebase-master = !git fetch origin master && git rebase origin/master
 	rebase-main = !git fetch origin main && git rebase origin/main
+	difft = !GIT_EXTERNAL_DIFF=difft git diff
+	diffts = !GIT_EXTERNAL_DIFF=difft git diff --staged
+	dlog = !GIT_EXTERNAL_DIFF=difft git log -p --ext-diff
 [color]
 	ui = auto
 
@@ -25,6 +29,22 @@
   path = ~/.gitconfig.local
 [diff]
 	tool = meld
+	colorMoved = default
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = Dracula
+	dark = true
+	file-style = bold yellow ul
+	hunk-header-style = omit
+
+[diff "difftastic"]
+	command = difft
 [branch]
 	autoSetupMerge = always
 [pull]
