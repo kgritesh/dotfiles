@@ -22,3 +22,4 @@ zsh/.zcustom.sh
 zsh/.zcompdump
 .zcompdump.*
 .zsh_sessions
+zsh/.zlocal.zsh
