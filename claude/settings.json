@@ -1,19 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "API_TIMEOUT_MS": "3000000",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    "API_TIMEOUT_MS": "3000000"
   },
   "permissions": {
     "allow": [
       "Bash(rg:*)",
       "Read(**)",
       "Edit(**)",
-      "MultiEdit(**)",
-      "Write(**)",
-      "Glob(**)",
-      "Grep(**)",
-      "LS(**)",
       "TodoRead(**)",
       "TodoWrite(**)",
       "Task(**)",
@@ -66,8 +60,14 @@
       "Bash(yarn --cwd apps/video-agent langfuse:*)"
     ],
     "deny": [
-      "Read(~/.*)",
-      "Edit(~/.*)",
+      "Read(~/.ssh/**)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Edit(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Edit(~/.gnupg/**)",
+      "Read(~/.config/**)",
+      "Edit(~/.config/**)",
       "Read(~/Library/**)",
       "Edit(~/Library/**)",
       "Read(~/Dropbox/**)",
@@ -83,15 +83,21 @@
     ],
     "defaultMode": "auto"
   },
-"statusLine": {
+  "model": "opus[1m]",
+  "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
     "padding": 0
   },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
-    "harness@harness": true,
-    "visual-explainer@visual-explainer-marketplace": true
+    "visual-explainer@visual-explainer-marketplace": true,
+    "aiqrank@aiqrank": false,
+    "figma@claude-plugins-official": true,
+    "compound-engineering@compound-engineering-plugin": true,
+    "cli-printing-press@cli-printing-press": true,
+    "slack@claude-plugins-official": true,
+    "harness@harness": true
   },
   "extraKnownMarketplaces": {
     "harness": {
@@ -105,12 +111,76 @@
         "source": "github",
         "repo": "nicobailon/visual-explainer"
       }
+    },
+    "aiqrank": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/aiqrank/plugin.git"
+      }
+    },
+    "claude-code-workflows": {
+      "source": {
+        "source": "github",
+        "repo": "shinpr/claude-code-workflows"
+      }
+    },
+    "compound-engineering-plugin": {
+      "source": {
+        "source": "github",
+        "repo": "EveryInc/compound-engineering-plugin"
+      }
+    },
+    "cli-printing-press": {
+      "source": {
+        "source": "github",
+        "repo": "mvanhorn/cli-printing-press"
+      }
+    },
+    "main": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/vertexcover-io/harness-engineering.git",
+        "ref": "v1.30.4"
+      }
     }
   },
-  "alwaysThinkingEnabled": false,
+  "outputStyle": "ELI5",
+  "feedbackDrafts": "off",
+  "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "medium"
+    },
+    "claude-sonnet-5": {
+      "effortLevel": "high"
+    }
+  },
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "autoCompactEnabled": false,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": false,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "disabledSkills": [
+    "learning-style",
+    "learn",
+    "harness:learn"
+  ],
   "feedbackSurveyState": {
     "lastShownTime": 1754331774684
-  },
-  "skipAutoPermissionPrompt": true
+  }
 }
