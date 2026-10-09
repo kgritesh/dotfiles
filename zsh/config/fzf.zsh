@@ -1,28 +1,12 @@
-# Kill process using fzf
-fkill() {
-    local pid
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
-    else
-        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+# Use fd for fzf's default source (respects .gitignore, includes hidden, skips .git)
+if command -v fd >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+fi
 
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-9}
-    fi
-}
-
-
-# Open the selected file
-fo() (
-  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  echo $file
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || emacs "$file"
-  fi
-)
+# Built-in shell integration: Ctrl+T (files), Ctrl+R (history), Alt+C (cd), Tab completion
+source <(fzf --zsh)
 
 # Taken from https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
 fzf-git-branch() {
@@ -39,63 +23,48 @@ fzf-git-checkout() {
     git rev-parse HEAD > /dev/null 2>&1 || return
 
     local branch
-
     branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
+    if [[ -z "$branch" ]]; then
         echo "No branch selected."
         return
     fi
 
-    # If branch name starts with 'remotes/' then it is a remote branch. By
-    # using --track and a remote branch name, it is the same as:
-    # git checkout -b branchName --track origin/branchName
     if [[ "$branch" = 'remotes/'* ]]; then
-        git checkout --track $branch
+        git switch --track "$branch"
     else
-        git checkout $branch;
+        git switch "$branch"
     fi
 }
 
+# Confirm-then-delete branch (local or remote). Pass -f for force-delete.
 fzf-git-delete() {
     git rev-parse HEAD > /dev/null 2>&1 || return
 
-    local branch
+    local force_flag="-d"
+    if [[ "$1" = "-f" ]]; then
+        force_flag="-D"
+    fi
 
+    local branch
     branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
+    if [[ -z "$branch" ]]; then
         echo "No branch selected."
         return
     fi
+
     if [[ "$branch" =~ 'remotes/([^/]+)/(.+)' ]]; then
-	echo "${match[*]}"
-	git push $match[1] :$match[2]
-	#git push  :$branch;
+        local remote="${match[1]}"
+        local remote_branch="${match[2]}"
+        printf "Delete REMOTE branch %s/%s? [y/N] " "$remote" "$remote_branch"
+        read -r confirm
+        [[ "$confirm" =~ ^[Yy]$ ]] || { echo "Aborted."; return; }
+        git push "$remote" ":$remote_branch"
     else
-	git branch -d $branch
+        git branch "$force_flag" "$branch"
     fi
 }
-
-fzf-git-force-delete() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    local branch
-
-    branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
-        echo "No branch selected."
-        return
-    fi
-    if [[ "$branch" =~ 'remotes/([^/]+)/(.+)' ]]; then
-	echo "${match[*]}"
-	git push $match[1] :$match[2]
-	#git push  :$branch;
-    else
-	git branch -D $branch
-    fi
-}
-
 
 alias gb='fzf-git-branch'
 alias gco='fzf-git-checkout'
 alias gdel='fzf-git-delete'
-alias gdel-force='fzf-git-force-delete'
+alias gdel-force='fzf-git-delete -f'
