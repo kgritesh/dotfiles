@@ -22,4 +22,20 @@ zsh/.zcustom.sh
 zsh/.zcompdump
 .zcompdump.*
 .zsh_sessions
+.DS_Store
+claude/settings.local.json
+
+# External Claude skills (installed, not owned here)
+claude/skills/.system/
+claude/skills/conductorscore/
+claude/skills/difit/
+claude/skills/difit-review/
+claude/skills/granola-cli
+claude/skills/humanizer/
+claude/skills/impeccable/
+claude/skills/synced/
+claude/skills/tech-debt/
+claude/skills/video-lens/
+claude/skills/permission-audit/*/
+claude/skills/linkedin-post-formatter/outputs/
 zsh/.zlocal.zsh
