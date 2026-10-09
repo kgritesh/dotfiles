@@ -1,0 +1,46 @@
+{
+  "skill_name": "ingest-applications",
+  "evals": [
+    {
+      "id": 1,
+      "name": "loop-tick-no-new-apps",
+      "prompt": "Check for new AI Engineer applications and score any new ones.",
+      "expected_output": "Skill triggers, runs scripts/discover_new.mjs against real Gmail + Notion state, reports zero new candidates (all current Gmail apps are already in Notion). Either creates no Notion pages, or — if a genuinely new application has arrived — creates a page and scores it. Output: brief summary of what was found.",
+      "assertions": [
+        { "text": "Invoked the ingest-applications skill — read SKILL.md and acknowledged the workflow" },
+        { "text": "Either ran scripts/discover_new.mjs OR explained why it didn't (e.g., 'gog not available'). Did not hallucinate fake candidates." },
+        { "text": "Did not write fake/fictional candidate pages to Notion" },
+        { "text": "Final summary clearly states how many new candidates were ingested (a number, possibly zero)" }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "scoring-strong-candidate-no-writes",
+      "prompt": "Based on the calibrated scoring rubric in the ingest-applications skill, what score (1-10) and recommendation would you give the following candidate? DO NOT write to Notion — just report your score, recommendation, and 3-sentence reasoning.\n\nCandidate: Riya Mehta\nBackground: IIT Bombay 2023 grad, currently at Lumenline AI (fictional; YC W23, well-funded customer-service AI startup, ~40 people) as a founding AI engineer for 2 years. At Lumenline: built the voice-agent evaluation harness used in production; fine-tuned Llama 3.1 8B with DPO (improved task success rate from 64% to 89%); shipped a multi-tool agent that handles 100K daily customer conversations. OSS: maintains agent-judge (an LLM-as-judge eval library) with 1200 GitHub stars and 30 contributors. GitHub: github.com/example-riya shows 50+ repos, regular commits over 3 years, focused on LLM evals and agentic RAG. Cover letter mentions she enjoys building 'systems where wrong outputs have real cost'.",
+      "expected_output": "Score in the 8-9 range with Recommendation 'Yes' or 'Strong Yes'. Reasoning specifically references the calibration (vs. the Anchor A=8 anchor), names Lumenline AI / DPO 64→89% / the 1200-star OSS / agent-judge. Does NOT inflate to 10 (which is reserved for outstanding+rare). Does NOT undercut to 7 or below (which would ignore the YC startup + concrete metrics + strong OSS). No Notion write occurs.",
+      "assertions": [
+        { "text": "Score is 8 or 9 (not 7, not 10)" },
+        { "text": "Recommendation is 'Yes' (for score 8) or 'Strong Yes' (for score 9)" },
+        { "text": "Reasoning explicitly references at least 2 of: Lumenline AI / DPO 64→89% / agent-judge OSS / 1200 stars / IIT Bombay / YC startup" },
+        { "text": "Reasoning references the calibration anchors (e.g., compares to Anchor A=8 or explains why this beats the anchor)" },
+        { "text": "Did NOT call any Notion-writing API or create a page (this prompt explicitly forbids writes)" }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "scoring-service-co-cap-no-writes",
+      "prompt": "Based on the calibrated scoring rubric in the ingest-applications skill, what score (1-10) and recommendation would you give the following candidate? DO NOT write to Notion — just report your score, recommendation, and 3-sentence reasoning.\n\nCandidate: Aakash Verma\nBackground: 4 years at TCS (Tata Consultancy Services) as 'AI/ML Lead Engineer'. Claims: built a multi-agent CrewAI system handling 50K daily queries; production RAG pipeline at 92% retrieval accuracy; fine-tuned Mistral 7B for a banking client (15-point accuracy bump); team-of-6 lead. M.Tech from VIT 2021 (CGPA 8.5). GitHub: github.com/example-aakash — 20 repos, mostly tutorial-grade LangChain demos with 0-2 stars each. No active OSS or blog. Cover letter is well-written and very polished — almost too polished.",
+      "expected_output": "Score is exactly 5 (the service-company hard cap from references/scoring_criteria.md). Recommendation 'No'. Reasoning explicitly cites the TCS / service-company cap as the limiting factor, and acknowledges that the claimed metrics may be real but the cultural fit / product ownership concerns dominate. No Notion write.",
+      "assertions": [
+        { "text": "Score is exactly 5 (not 6, 7, or 8 — the TCS service-company hard cap applies regardless of claimed metrics)" },
+        { "text": "Recommendation is 'No'" },
+        { "text": "Reasoning explicitly identifies TCS as a service company AND mentions the cap rule" },
+        { "text": "Reasoning does NOT inflate the score by giving full weight to the claimed metrics (CrewAI 50K queries, 92% RAG, Mistral fine-tuning)" },
+        { "text": "Did NOT call any Notion-writing API or create a page" }
+      ],
+      "files": []
+    }
+  ]
+}

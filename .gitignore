@@ -39,3 +39,7 @@ claude/skills/video-lens/
 claude/skills/permission-audit/*/
 claude/skills/linkedin-post-formatter/outputs/
 zsh/.zlocal.zsh
+
+# ingest-applications generated output (candidate PII)
+claude/skills/ingest-applications/resumes/
+claude/skills/ingest-applications/last_discovery.json
